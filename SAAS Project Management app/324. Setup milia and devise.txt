@@ -1,0 +1,40 @@
+In your gemfile add the following gems:
+
+gem 'devise'
+
+gem 'milia'
+
+Remove the root route set in the config/routes.rb file
+
+Install milia:
+
+rails g milia:install --org_email='do-not-reply@example.com'
+
+Run all migrations:
+
+rake db:migrate
+
+Make a commit to git repo, push to github and then deploy to heroku, run heroku run rake db:migrate to run all pending migrations in heroku
+
+---------------------------------------------------------------
+
+IMPORTANT: If using Ruby 2.5+ and Rails 5.2 (or above), make the following changes:
+
+---------------------------------------------------------------
+
+Make your app/models/user.rb look like this
+
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :validatable
+  acts_as_universal_and_determines_account
+  has_one :member, :dependent => :destroy
+end
+Comment out this line in your config/application.rb
+
+config.load_defaults 5.2
+so that it looks like this
+
+#config.load_defaults 5.2

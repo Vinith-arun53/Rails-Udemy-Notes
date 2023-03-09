@@ -1,0 +1,4 @@
+>	command lines
+>> 	rails console command lines
+*	steps
+---------------------------------------------------

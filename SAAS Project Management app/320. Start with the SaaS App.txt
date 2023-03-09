@@ -1,0 +1,26 @@
+>	command lines
+>> 	rails console command lines
+*	steps
+---------------------------------------------------
+>rails new saas-project-app -d postgresql
+>cd saas-project-app
+>rake db:create db:migrate
+>rails s -b 0.0.0.0
+>git init
+>git add -A
+>git commit -m ""
+>git remote add origin git@github.com:udemyrailscourse/saas-project-app.git
+>git remote -v
+>rails g controller home index
+(in bottom of the gem file)
+group :production do
+	gem 'rails_12factor'
+end
+
+>bundle install --without production
+>heroku create
+>heroku rename saas-app
+>git status // to verify everything pushed to github
+>git push heroku master // now you can find you application is running in saas-app.herokuapp.com
+
+

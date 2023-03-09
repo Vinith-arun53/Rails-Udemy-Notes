@@ -1,0 +1,32 @@
+>	command lines
+>> 	rails console command lines
+*	steps
+---------------------------------------------------
+(in gem file add)
+gem 'twitter-bootstrap-rails'
+>bundle install --without production
+>rails generate bootstrap:install static
+gem 'devise-bootstrap-views'
+>bundle install
+>rails g devise:views:locale en
+>rails g devise:views:bootstrap_templates
+(In application.css file)
+*add the line=> *=require devise_bootstrap_views
+>rails g bootstrap:layout application
+*go to the twitter-bootstrap-rails page.
+*go to application/helpers/bootstrap_flash_helper file and copy the content.
+*paste the copied content in application/helper/applicationhelper
+*go to the config/initializers/milia.rb
+*set user_coupon, use_recaptcha to false
+* go to the home_controller file.
+def index
+	if current_user
+		if session[:tenant_id]
+			Tenant.set_current_tenant session[:tenant_id]
+		else
+			Tenant.set_current_tenant current_user.tenants.first
+		end
+		@tenant = Tenant.current_tenant
+		params[:tenant_id] = @tenant.id
+	end
+end

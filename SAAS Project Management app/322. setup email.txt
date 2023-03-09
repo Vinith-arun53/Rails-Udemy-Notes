@@ -1,0 +1,38 @@
+>	command lines
+>> 	rails console command lines
+*	steps
+---------------------------------------------------
+
+>heroku addons:create sendgrid:starter
+>heroku config:set SENDGRID_USERNAME=
+>heroku config:set SENDGRID_PASSWORD=
+(In config/environment.rb file )
+ActionMailer::Base.smtp_settings = {
+	:address => 'smtp.sendgrid.net',
+	:port => '587',
+	:authentication => :plain,
+	:user_name = ENV['SENDGRID_USERNAME'],
+	:password => ENV['SENDGRID_PASSWORD'],
+	:domain => 'heroku.com',
+	:enable_starttls_auto => true
+}
+
+(in config/environments/developement.rb file)
+config.action_mailer.delivery_method = :test
+config.action_mailer.default_url_options = {:host => 'http://ruby-on-rails-123170.nitrousapp.com:300'}
+
+(in config/environments/production.rb file)
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_url_options = {:host => 'saas-app.herokuapp.com', :protocol => 'https'}
+
+*remove trubo-links from gemfile and javascript file
+>bundle install --without developement
+>git add and commit
+
+
+
+
+
+
+
+
